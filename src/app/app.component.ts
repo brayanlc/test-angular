@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
-import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map, MapOptions, tileLayer, TileLayer } from 'leaflet';
+import {Component} from '@angular/core';
+import {
+  circleMarker,
+  geoJSON,
+  GeoJSONOptions,
+  LatLng,
+  LatLngBounds,
+  Map,
+  MapOptions,
+  tileLayer,
+  TileLayer
+} from 'leaflet';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent 
+export class AppComponent
 {
   public map:Map;
 
@@ -26,7 +36,7 @@ export class AppComponent
 
   public constructor()
   {
-    
+
     this.baseLayer = tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       crossOrigin: 'anonymous',
       className: 'OSM',
@@ -50,13 +60,13 @@ export class AppComponent
     const options:GeoJSONOptions = {
       pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
       style: feature =>  ({
-        radius: 8, 
+        radius: 8,
         color: "#333",
         fillColor: "#FFFA4D",
         weight: 1,
         opacity: 1,
         fillOpacity: 1
-      }) 
+      })
     };
 
     geoJSON(luminaires, options).addTo(this.map);
