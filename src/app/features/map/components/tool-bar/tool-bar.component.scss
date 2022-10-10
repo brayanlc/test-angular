@@ -1,0 +1,26 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+  width: 27.5%;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff;
+  border-radius: 15px;
+  color: #4f4f4f;
+  font-size: 0.875rem;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    border: none;
+  }
+}
