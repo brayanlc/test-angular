@@ -7,6 +7,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LuminaryComponent } from './pages/luminary/luminary.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {HighchartsChartModule} from "highcharts-angular";
 
 @NgModule({
   declarations: [ToolBarComponent, MapComponent, LuminaryComponent],
@@ -16,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LeafletModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    HighchartsChartModule,
   ],
 })
 export class MapModule {}

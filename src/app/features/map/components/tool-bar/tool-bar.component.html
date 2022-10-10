@@ -1,126 +1,164 @@
-<form class="container" [formGroup]="formLuminaries">
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="height">Altura</label>
-    <input id="height" formControlName="altura" type="text" />
+<div class="container">
+  <div>
+    <button (click)="setTap('graph')" [class.active]="tab === 'graph'">
+      <img src="assets/icons/graph.png" />
+    </button>
+    <button (click)="setTap('info')" [class.active]="tab === 'info'">
+      <img src="assets/icons/info.png" />
+    </button>
   </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="quantity-of-lamps">Cantidad lámparas</label>
-    <input
-      id="quantity-of-lamps"
-      formControlName="cantidad_lamparas"
-      type="text"
-    />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="axis-distance">Distancia eje</label>
-    <input id="axis-distance" formControlName="distancia_eje" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="auxiliary-equipment">Equipo auxiliar</label>
-    <input
-      id="auxiliary-equipment"
-      formControlName="equipo_auxiliar"
-      type="text"
-    />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="status-lamp">Estado lámpara</label>
-    <input id="status-lamp" formControlName="estado_lampara" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="luminaire-status">Estado luminaria</label>
-    <input
-      id="luminaire-status"
-      formControlName="estado_luminaria"
-      type="text"
-    />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="status-support">Estado soporte</label>
-    <input id="status-support" formControlName="estado_soporte" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="tag">Etiqueta</label>
-    <input id="tag" formControlName="vial" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="track-side">Lado vía</label>
-    <input id="track-side" formControlName="lado_via" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="arm-length">Longitud brazo</label>
-    <input id="arm-length" formControlName="longitud_brazo" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="lamp-brand">Marca lámpara</label>
-    <input id="lamp-brand" formControlName="marca_lampara" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="luminaire-brand">Marca luminaria</label>
-    <input id="luminaire-brand" formControlName="marca_luminaria" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="support-brand">Marca soporte</label>
-    <input id="support-brand" formControlName="marca_soporte" type="text" />
-  </div>
-  <div
-    class="form-control"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-  >
-    <label for="lamp-model">Modelo lámpara</label>
-    <input id="lamp-model" formControlName="modelo_lampara" type="text" />
-  </div>
-</form>
+
+  <ng-container *ngIf="tab === 'graph'">
+    <select [formControl]="tipoForm">
+      <option disabled value="">Seleccione un atributo</option>
+      <option value="tipo_soporte">Tipo Soporte</option>
+      <option value="tipo_luminaria">Tipo Luminaria</option>
+      <option value="tipo_lampara">Tipo Lámpara</option>
+    </select>
+
+    <highcharts-chart
+      [(update)]="updateFlag"
+      [Highcharts]="highcharts"
+      [options]="chartOptions"
+      style="width: 100%; height: 400px; display: block"
+    >
+    </highcharts-chart>
+  </ng-container>
+
+  <ng-container *ngIf="tab === 'info'">
+    <form [formGroup]="formLuminaries">
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="height">Altura</label>
+        <input id="height" formControlName="altura" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="quantity-of-lamps">Cantidad lámparas</label>
+        <input
+          id="quantity-of-lamps"
+          formControlName="cantidad_lamparas"
+          type="text"
+        />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="axis-distance">Distancia eje</label>
+        <input id="axis-distance" formControlName="distancia_eje" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="auxiliary-equipment">Equipo auxiliar</label>
+        <input
+          id="auxiliary-equipment"
+          formControlName="equipo_auxiliar"
+          type="text"
+        />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="status-lamp">Estado lámpara</label>
+        <input id="status-lamp" formControlName="estado_lampara" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="luminaire-status">Estado luminaria</label>
+        <input
+          id="luminaire-status"
+          formControlName="estado_luminaria"
+          type="text"
+        />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="status-support">Estado soporte</label>
+        <input
+          id="status-support"
+          formControlName="estado_soporte"
+          type="text"
+        />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="tag">Etiqueta</label>
+        <input id="tag" formControlName="vial" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="track-side">Lado vía</label>
+        <input id="track-side" formControlName="lado_via" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="arm-length">Longitud brazo</label>
+        <input id="arm-length" formControlName="longitud_brazo" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="lamp-brand">Marca lámpara</label>
+        <input id="lamp-brand" formControlName="marca_lampara" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="luminaire-brand">Marca luminaria</label>
+        <input
+          id="luminaire-brand"
+          formControlName="marca_luminaria"
+          type="text"
+        />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="support-brand">Marca soporte</label>
+        <input id="support-brand" formControlName="marca_soporte" type="text" />
+      </div>
+      <div
+        class="form-control"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="lamp-model">Modelo lámpara</label>
+        <input id="lamp-model" formControlName="modelo_lampara" type="text" />
+      </div>
+    </form>
+  </ng-container>
+</div>

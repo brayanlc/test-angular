@@ -72,7 +72,7 @@ export interface Crs {
 
 export interface FeatureCollection extends geojson.GeoJsonObject {
   crs: Crs;
-  feature: Feature[];
+  features: Feature[];
   type:
     | 'Point'
     | 'MultiPoint'
