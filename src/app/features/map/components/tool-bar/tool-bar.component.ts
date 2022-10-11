@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import { Properties } from '../../state/geolocation';
@@ -20,7 +20,7 @@ export class ToolBarComponent implements OnInit {
       type: 'pie',
     },
     title: {
-      text: 'Browser market shares in March, 2022',
+      text: 'Liminaria',
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
@@ -49,7 +49,7 @@ export class ToolBarComponent implements OnInit {
       },
     ],
   };
-  tab: 'info' | 'graph' = 'info';
+  tab: 'info' | 'graph' | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -58,7 +58,7 @@ export class ToolBarComponent implements OnInit {
     this.formLuminaries = this.initForm();
   }
 
-  hola(type: string) {
+  changePie(type: string) {
     this.geolocationService.getDataPie(type).subscribe(data => {
       (this.chartOptions.series as Highcharts.SeriesOptionsType[])[0] = {
         name: 'Brands',
@@ -67,17 +67,12 @@ export class ToolBarComponent implements OnInit {
         data,
       };
       this.updateFlag = true;
-      setTimeout(() => {
-        this.updateFlag = true;
-      }, 500);
-      console.log(this.chartOptions);
     });
   }
 
   ngOnInit(): void {
-    console.log(this.chartOptions);
     this.tipoForm.valueChanges.subscribe(value => {
-      this.hola(value);
+      this.changePie(value);
     });
   }
 
@@ -101,6 +96,8 @@ export class ToolBarComponent implements OnInit {
   }
 
   setForm(properties: Properties) {
+    this.setTap('info');
+    console.log('ente', this.tab);
     this.formLuminaries.patchValue(properties);
   }
 

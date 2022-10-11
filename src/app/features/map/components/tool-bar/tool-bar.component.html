@@ -1,11 +1,14 @@
 <div class="container">
-  <div>
-    <button (click)="setTap('graph')" [class.active]="tab === 'graph'">
-      <img src="assets/icons/graph.png" />
-    </button>
-    <button (click)="setTap('info')" [class.active]="tab === 'info'">
-      <img src="assets/icons/info.png" />
-    </button>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <div>
+      <button [class.active]="tab === 'graph'" (click)="setTap('graph')">
+        <img src="assets/icons/graph.png" />
+      </button>
+      <button [class.active]="tab === 'info'" (click)="setTap('info')">
+        <img src="assets/icons/info.png" />
+      </button>
+    </div>
+    <button (click)="tab = undefined" *ngIf="tab">X</button>
   </div>
 
   <ng-container *ngIf="tab === 'graph'">

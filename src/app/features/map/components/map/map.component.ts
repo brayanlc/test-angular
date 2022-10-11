@@ -38,7 +38,6 @@ import { FeatureCollection, Properties } from '../../state/geolocation';
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
   public map!: Map;

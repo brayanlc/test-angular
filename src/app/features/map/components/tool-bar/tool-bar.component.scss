@@ -1,3 +1,27 @@
+@mixin screen($size) {
+  $desktop: '(min-width: 1024px)';
+  $tablet: '(min-width: 768px) and (max-width: 1023px)';
+  $mobile: '(max-width: 767px)';
+  @if $size == desktop {
+    @media only screen and #{$desktop} {
+      @content;
+    }
+  } @else if $size == tablet {
+    @media only screen and #{$tablet} {
+      @content;
+    }
+  } @else if $size == mobile {
+    @media only screen and #{$mobile} {
+      @content;
+    }
+  } @else {
+    @media only screen and #{$size} {
+      @content;
+    }
+  }
+}
+
+
 .container {
   position: absolute;
   top: 0;
@@ -11,13 +35,22 @@
   color: #4f4f4f;
   font-size: 0.875rem;
 
+  @include screen('mobile') {
+    top: inherit;
+    right: inherit;
+    bottom: 0;
+    left: 50%;
+    width: 80%;
+    transform: translateX(-50%);
+  }
+
   button {
+    display: inline-block;
+    margin-bottom: 1rem;
     background-color: transparent;
     border: none;
-    margin-bottom: 1rem;
-    display: inline-block;
-    cursor: pointer;
     border-bottom: 2px solid #ffffff;
+    cursor: pointer;
 
     &:first-child {
       margin-right: 0.5rem;
@@ -47,7 +80,7 @@
 }
 
 select {
-  width: 100%;
   display: inline-block;
+  width: 100%;
   font-size: 1rem;
 }
